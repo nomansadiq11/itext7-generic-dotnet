@@ -1,4 +1,5 @@
-﻿using iText.Layout.Element;
+﻿using iText.Kernel.Colors;
+using iText.Layout.Element;
 using iText.Layout.Properties;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,12 @@ namespace iText7PDFMaker
             return paragraph;
         }
 
+        public static Paragraph GetParagraph(Text text, TextAlignment textAlignment = TextAlignment.LEFT, int Fontsize = 12)
+        {
+            Paragraph paragraph = new Paragraph(text).SetTextAlignment(textAlignment).SetFontSize(Fontsize);
+            return paragraph;
+        }
+
         public static Paragraph GetParagraph(string paragrapshvalue, int Fontsize = 12)
         {
             Paragraph paragraph = new Paragraph(paragrapshvalue).SetFontSize(Fontsize);
@@ -24,7 +31,10 @@ namespace iText7PDFMaker
 
         public static Paragraph GetParagraph(string paragrapshvalue)
         {
-            Paragraph paragraph = new Paragraph(paragrapshvalue);
+            iText.Kernel.Colors.Color mycolor = new DeviceRgb(255, 100, 20);
+            Text redText = new Text(paragrapshvalue).SetFontColor(mycolor);
+
+            Paragraph paragraph = new Paragraph(redText);
             return paragraph;
         }
     }
