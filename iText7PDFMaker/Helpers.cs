@@ -31,7 +31,7 @@ namespace iText7PDFMaker
 
         public static Paragraph GetParagraph(string paragrapshvalue)
         {
-            iText.Kernel.Colors.Color mycolor = new DeviceRgb(255, 100, 20);
+            iText.Kernel.Colors.Color mycolor = new DeviceRgb(5, 115, 212);
             Text redText = new Text(paragrapshvalue).SetFontColor(mycolor);
 
             Paragraph paragraph = new Paragraph(redText);
