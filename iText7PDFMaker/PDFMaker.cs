@@ -35,7 +35,6 @@ namespace iText7PDFMaker
             return paragraph;
         }
 
-
         public static Table GetTable(int NumOfCols, List<string> Headers, System.Data.DataTable datarows)
         {
             Table _table = new Table(NumOfCols, true);
@@ -50,9 +49,9 @@ namespace iText7PDFMaker
 
             foreach(System.Data.DataRow row in datarows.Rows)
             {
-                foreach(System.Data.DataColumn datacol in row.ItemArray)
+                foreach(System.Data.DataColumn datacol in datarows.Columns)
                 {
-                    var val = new Paragraph(datacol.ColumnName[0].ToString()).SetFontSize(10);
+                    var val = new Paragraph(row[datacol].ToString()).SetFontSize(10);
                     _table.AddCell(new Cell().Add(val));
                 }
             }
@@ -62,6 +61,44 @@ namespace iText7PDFMaker
 
 
             return _table;
+
+        }
+
+        public static Table GetTable(int NumOfCols, System.Data.DataTable datarows)
+        {
+            Table _table = new Table(NumOfCols, true);
+
+
+            foreach (var head in datarows.Columns)
+            {
+                var val = new Paragraph(head.ToString()).SetFontSize(10);
+                _table.AddCell(new Cell().Add(val));
+            }
+
+
+            foreach (System.Data.DataRow row in datarows.Rows)
+            {
+                foreach (System.Data.DataColumn datacol in datarows.Columns)
+                {
+                    var val = new Paragraph(row[datacol].ToString()).SetFontSize(10);
+                    _table.AddCell(new Cell().Add(val));
+                }
+            }
+
+
+
+
+
+            return _table;
+
+        }
+
+        public static Paragraph GetSpace()
+        {
+            Paragraph space = new Paragraph();
+            space.Add("\n");
+
+            return space;
 
         }
 
