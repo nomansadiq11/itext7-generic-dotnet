@@ -23,10 +23,47 @@ namespace iText7PDFMaker
         {
             iText.Kernel.Colors.Color mycolor = new DeviceRgb(153, 204, 255);
             Text redText = new Text(paragrapshvalue).SetFontColor(mycolor);
-            
+
 
             Paragraph paragraph = Helpers.GetParagraph(redText, TextAlignment.LEFT, 10);
             return paragraph;
         }
+
+        public static Paragraph GetText(string paragrapshvalue)
+        {
+            Paragraph paragraph = Helpers.GetParagraph(paragrapshvalue, TextAlignment.LEFT, 8);
+            return paragraph;
+        }
+
+
+        public static Table GetTable(int NumOfCols, List<string> Headers, System.Data.DataTable datarows)
+        {
+            Table _table = new Table(NumOfCols, true);
+
+            
+            foreach (var head in Headers)
+            {
+                var val = new Paragraph(head).SetFontSize(10);
+                _table.AddCell(new Cell().Add(val));
+            }
+
+
+            foreach(System.Data.DataRow row in datarows.Rows)
+            {
+                foreach(System.Data.DataColumn datacol in row.ItemArray)
+                {
+                    var val = new Paragraph(datacol.ColumnName[0].ToString()).SetFontSize(10);
+                    _table.AddCell(new Cell().Add(val));
+                }
+            }
+
+
+
+
+
+            return _table;
+
+        }
+
     }
 }
